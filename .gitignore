@@ -1,0 +1,12 @@
+*.xml
+!202/phpunit.xml
+!202/build.xml
+*.log
+.php_cs.cache
+.php-cs-fixer.cache
+node_modules
+/vendor/*
+!/vendor/totpsclasslib
+!/vendor/.htaccess
+*.map
+views/js/*

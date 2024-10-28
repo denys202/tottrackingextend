@@ -1,0 +1,37 @@
+name: Coding Standart
+on: [push]
+jobs:
+  # Check there is no syntax errors in the project
+  php-linter:
+    name: PHP Syntax check 8.1
+    runs-on: ubuntu-latest
+    steps:
+      - name: PHP syntax checker 8.1
+        uses: prestashop/github-action-php-lint/8.1@master
+        with:
+          folder-to-exclude: "! -path \"./202/*\" ! -path \"./vendor/*\""
+
+  # Check the PHP code follow the coding standards
+  php-cs-fixer:
+    name: PHP-CS-Fixer
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.1'
+
+      - name: Checkout
+        uses: actions/checkout@v2.0.0
+
+      - name: Cache dependencies
+        uses: actions/cache@v2
+        with:
+          path: vendor
+          key: php-${{ hashFiles('composer.lock') }}
+
+      - name: Install dependencies
+        run: composer update --ignore-platform-reqs
+
+      - name: Run PHP-CS-Fixer
+        run: ./vendor/bin/php-cs-fixer fix -vvv --dry-run --using-cache=no --diff

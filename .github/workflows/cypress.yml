@@ -1,0 +1,35 @@
+name: Cypress tests
+on: [push]
+jobs:
+  # Run PHPUnit against the module and a PrestaShop release
+  cypress:
+    name: Cypress
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        presta-versions: ['8']
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2.0.0
+
+      - name: Cypress run
+        uses: cypress-io/github-action@v6
+        with:
+          build: npm run build
+          start: echo "Starting tests"
+          browser: chrome
+          install: true
+          working-directory: views/_dev
+          config: baseUrl=https://ps-dev-conf.demo.202-ecommerce.com
+        env:
+          CYPRESS_host: https://ps-dev-conf.demo.202-ecommerce.com
+
+      - name: Archive test results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cypress-results
+          path: |
+            ./views/_dev/cypress/videos
+            ./views/_dev/cypress/screenshots
+          retention-days: 30

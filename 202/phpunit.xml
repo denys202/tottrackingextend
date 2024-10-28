@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- https://phpunit.de/manual/current/en/appendixes.configuration.html -->
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.3/phpunit.xsd"
+         backupGlobals="false"
+         colors="false"
+         verbose="true"
+         convertNoticesToExceptions="false"
+         bootstrap="phpunit_bootstrap.php">
+  <coverage>
+    <include>
+      <directory suffix=".php">../src</directory>
+    </include>
+    <report>
+      <cobertura outputFile="build/phpunit-cobertura.xml"/>
+    </report>
+  </coverage>`
+  <php>
+    <ini name="error_reporting" value="-1" />
+    <env name="SYMFONY_DEPRECATIONS_HELPER" value="disabled" />
+  </php>
+  <testsuites>
+    <testsuite name="tottrackingextend">
+      <directory suffix=".php">test</directory>
+    </testsuite>
+  </testsuites>
+  <filter>
+    <whitelist>
+      <directory suffix=".php">../src</directory>
+    </whitelist>
+  </filter>
+  <logging>
+      <junit outputFile="build/phpunit-junit.xml"/>
+  </logging>
+</phpunit>
