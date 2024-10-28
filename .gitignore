@@ -10,3 +10,4 @@ node_modules
 !/vendor/.htaccess
 *.map
 views/js/*
+views/manifest.json

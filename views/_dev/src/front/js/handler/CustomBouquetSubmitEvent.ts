@@ -26,7 +26,7 @@ import {DatalayerEvent} from "./DatalayerEvent.ts";
 export default class CustomBouquetSubmitEvent extends DatalayerEvent {
   eventName: string = 'customBouquet';
 
-  getParams(event: JQuery.TriggeredEvent): Object {
+  getParams(_event: JQuery.TriggeredEvent): Object {
     window.dataLayer = window.dataLayer || [];
     const formData = {}; // form data params
 
