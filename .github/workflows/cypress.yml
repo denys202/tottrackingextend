@@ -10,7 +10,7 @@ jobs:
         presta-versions: ['8']
     steps:
       - name: Checkout
-        uses: actions/checkout@v2.0.0
+        uses: actions/checkout@v4
 
       - name: Cypress run
         uses: cypress-io/github-action@v6
@@ -33,3 +33,4 @@ jobs:
             ./views/_dev/cypress/videos
             ./views/_dev/cypress/screenshots
           retention-days: 30
+          if-no-files-found: ignore
