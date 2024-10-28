@@ -1,7 +1,9 @@
 name: Cypress tests
-on: [push]
+on:
+  schedule:
+    - cron: '0 */12 * * *'
+  push:
 jobs:
-  # Run PHPUnit against the module and a PrestaShop release
   cypress:
     name: Cypress
     runs-on: ubuntu-latest
